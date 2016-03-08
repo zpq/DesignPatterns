@@ -30,7 +30,7 @@ class PreAction extends Decorator{
 class afterAction extends Decorator{
     public function sayHello() {
         $this->wrapper->sayHello();
-        echo "I am pre action\r\n";
+        echo "I am after action\r\n";
     }
 }
 
