@@ -79,7 +79,7 @@ $helloDec->addAfterDecorator(new AfterActionA);
 $helloDec->addPreDecorator(new PreActionB);
 $helloDec->addAfterDecorator(new AfterActionB);
 
-$helloDec->sayHello();
+$helloDec->sayHello(); 
 
 
 
