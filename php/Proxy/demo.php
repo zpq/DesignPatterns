@@ -1,32 +1,63 @@
 <?php
 
 
-class DataBase {
-    private $scenario = 'read';
+class Db {
     
-    public function __construct() {
-        return new self;
+    public static function getMasterDb() {
+        echo "I am master\r\n";
     }
     
-    private function changeConnection() {
-        echo "change to ".$this->scenario." database schema\n\r";
-    }
-    
-    public function getScenario() {
-        return $this->scenario;
-    }
-    
-    public function setScenario($type) {
-        if($type == 'read' || $type == 'write') {
-            $this->scenario = $type;
-        }
-        $this->changeConnection();
-    }
-    
-    
-    
-    
+    public static function getSlaveDb() {
+        echo "I am slave\r\n";
+    } 
     
 }
+
+
+interface IProxy{
+    public function select();
+    public function update();
+}
+
+
+class ProxyDb implements IProxy{
+    public function select() {
+        Db::getSlaveDb();
+    }
+
+    public function update() {
+        DB::getMasterDb();
+    }    
+}
+
+
+class Client{
+    
+    private $pdb;
+    
+    public function __construct(IProxy $pdb) {
+        $this->pdb = $pdb;
+    }
+    
+    public function getUsername() {
+        $this->pdb->select();
+    }
+    
+    public function setUsername() {
+        $this->pdb->update();
+    }
+    
+}
+
+
+$db = new ProxyDb();
+
+$c = new Client($db);
+
+$c->getUsername();
+$c->setUsername();
+
+
+
 
 
