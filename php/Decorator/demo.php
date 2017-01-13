@@ -34,24 +34,5 @@ class afterAction extends Decorator{
     }
 }
 
-
-$pre = new PreAction(new Hello);
+$pre = new PreAction(new afterAction(new Hello));
 $pre->sayHello();
-
-$after = new afterAction(new Hello);
-$after->sayHello();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

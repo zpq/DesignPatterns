@@ -14,7 +14,7 @@ class Webservice implements IRender{
     
     public function renderData() {
         return $this->data;
-    }    
+    }
 }
 
 
@@ -40,7 +40,7 @@ class RenderInXml extends RenderDecorator {
         }
 
         return $doc->saveXML();
-    }    
+    }
 }
 
 class RenderInJson extends RenderDecorator {
@@ -49,7 +49,7 @@ class RenderInJson extends RenderDecorator {
     public function renderData() {
         $this->output = $this->wrapper->renderData();
         return json_encode($this->output);
-    }    
+    }
 }
 
 $data = array(
@@ -65,19 +65,3 @@ echo $xml->renderData();
 
 $json = new RenderInJson($webservice);
 echo $json->renderData();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

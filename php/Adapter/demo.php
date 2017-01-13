@@ -37,14 +37,14 @@ class MovieAdapter implements IPlayer{
     
     public function playMusic() {
         $this->moviePlayer->playMovie();
-    }    
+    }
 }
 
 interface IMoviePlayer{
     public function playMovie();
 }
 
-class MovePlayer implements IMoviePlayer {
+class MoviePlayer implements IMoviePlayer {
     
     private $movie;
 
@@ -54,7 +54,7 @@ class MovePlayer implements IMoviePlayer {
 
     public function playMovie() {
         echo "start to play movie: $this->movie, enjoy it!\r\n";
-    }    
+    }
 }
 
 
@@ -63,7 +63,7 @@ class TestFactory{
     public static function getPlayer() {
         return array(
             new MusicPlayer('fade'),
-            new MovieAdapter(new MovePlayer('007'))
+            new MovieAdapter(new MoviePlayer('007'))
         );
     }
     
